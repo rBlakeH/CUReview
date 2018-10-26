@@ -1,0 +1,11 @@
+body{
+	background-color: #cfb87c;
+	color : black;
+	vertical-align: middle;
+}
+.scrollable-menu {
+    height: auto;
+    max-height: 400px;
+    max-width: 400px;
+    overflow-x: hidden;
+}
