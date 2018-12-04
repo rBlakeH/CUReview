@@ -1,0 +1,30 @@
+<!--Including Header partial-->
+<%- include ../layouts/header.ejs %>
+
+<% if (messages.error) { %>
+    <p style="color:red"><%- messages.error %></p>
+<% } %>
+<% if (messages.success) { %>
+    <p style="color:green"><%- messages.success %></p>
+<% } %>
+
+<!--Create a form to take input from user-->
+<form action="/classes/add" method="post" name="form1">
+    <table width="25%" border="0">
+        <tr>
+            <td>Class Number</td>
+            <td><input type="text" name="classnumber" id="name" value="<%= classnumber %>"/></td>
+        </tr>
+        <tr>
+            <td>Class</td>
+            <td><input type="text" name="classname" value="<%= classname %>"/></td>
+        </tr>
+        <tr>
+            <td></td>
+            <td><input type="submit" name="Submit" value="Add"/></td>
+        </tr>
+    </table>
+</form>
+
+<!--Including Footer partial-->
+<%- include ../layouts/footer.ejs %>
