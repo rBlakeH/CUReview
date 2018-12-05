@@ -36,6 +36,7 @@ var index = require('./routes/index');
 var classes = require('./routes/classes');
 app.use('/', index);
 app.use('/classes', classes);
+app.use('/public', express.static('public'));
 
 
 var port = 4000;
