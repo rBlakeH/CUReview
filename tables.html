@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Tables</title>
+    <title>CUReview</title>
 
     <!-- Bootstrap core CSS-->
     <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
@@ -23,14 +23,24 @@
     <!-- Custom styles for this template-->
     <link href="css/sb-admin.css" rel="stylesheet">
 
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-app.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/5.5.5/firebase-firestore.js"></script>
+
   </head>
 
   <body id="page-top">
+
+    <!-- JS files -->
+    <script src="tables.js"></script>
+    <script src="firebase.js"></script>
+
   <!-- Navbar -->
     <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
       <img src="https://www.clipartmax.com/png/full/6-61239_logo-interlocking-cu-university-of-colorado-boulder-colors.png" height="40"
       width="40" id="cu" >
-      <a class="navbar-brand " href="index.html">Review</a>
+      <a class="navbar-brand " href="">Review</a>
 
       <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       </form>
@@ -43,10 +53,7 @@
             <i class="fas fa-user-circle fa-fw"></i>
           </a>
           <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
-            <a class="dropdown-item" href="#">Settings</a>
-            <!-- <a class="dropdown-item" href="#">Activity Log</a> -->
-            <div class="dropdown-divider"></div>
-            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal">Logout</a>
+            <a class="dropdown-item" href="#" data-toggle="modal" data-target="#logoutModal" onclick="tablesApp.logOut">Logout</a>
           </div>
         </li>
       </ul>
@@ -81,8 +88,7 @@
                     <tr>
                       <th>Class Number</th>
                       <th>Name</th>
-                      <th>Up Votes</th>
-                      <th>Down Votes</th>
+                      <th>Vote</th>
                       <th>Score</th>
                     </tr>
                   </thead>
@@ -90,8 +96,7 @@
                     <tr>
                       <th>Class Number</th>
                       <th>Name</th>
-                      <th>Up Votes</th>
-                      <th>Down Votes</th>
+                      <th>Vote</th>
                       <th>Score</th>
                     </tr>
                   </tfoot>
@@ -100,56 +105,63 @@
                     <tr>
                       <td class="mr-5">1300</td>
                       <td>Computer Scince 1: Starting Computing</td>
-                      <td><a class="btn btn-success round" >Up</a> #</td>
-                      <td><a class="btn btn-danger round" >Down</a> #</td>
+                      <td style="text-align: center; vertical-align: middle;"><a href="#" class="btn btn-lg btn-success round"><span class="fas fa-arrow-down"></span></a>
+                        <a href="#" class="btn btn-lg btn-danger round"><span class="fas fa-arrow-up"></span></a>
+                      </td>
                       <td>#</td>
                     </tr>
 
                     <tr>
                       <td>2270</td>
                       <td> Computer Science 2: Data Structures </td>
-                      <td><a class="btn btn-success round" >Up</a> #</td>
-                      <td><a class="btn btn-danger round" >Down</a> #</td>
+                      <td style="text-align: center; vertical-align: middle;"><a href="#" class="btn btn-lg btn-success round"><span class="fas fa-arrow-down"></span></a>
+                          <a href="#" class="btn btn-lg btn-danger round"><span class="fas fa-arrow-up"></span></a>
+                      </td>
                       <td>3.3</td>
                     </tr>
 
                     <tr>
                       <td>2400</td>
                       <td> Comptuer Systems</td>
-                      <td><a class="btn btn-success round" >Up</a> #</td>
-                      <td><a class="btn btn-danger round" >Down</a> #</td>
+                      <td style="text-align: center; vertical-align: middle;"><a href="#" class="btn btn-lg btn-success round"><span class="fas fa-arrow-down"></span></a>
+                          <a href="#" class="btn btn-lg btn-danger round"><span class="fas fa-arrow-up"></span></a>
+                      </td>
                       <td>3.3</td>
                     </tr>
 
                     <tr>
                       <td>2820</td>
                       <td> Linear Algebra with Computer Science Application</td>
-                      <td><a class="btn btn-success round" >Up</a> #</td>
-                      <td><a class="btn btn-danger round" >Down</a> #</td>
+                      <td style="text-align: center; vertical-align: middle;"><a href="#" class="btn btn-lg btn-success round"><span class="fas fa-arrow-down"></span></a>
+                          <a href="#" class="btn btn-lg btn-danger round"><span class="fas fa-arrow-up"></span></a>
+                      </td>
                       <td>3.3</td>
                     </tr>
 
                     <tr>
-                      <td>2400</td>
-                      <td> Comptuer Systems</td>
-                      <td><a class="btn btn-success round" >Up</a> #</td>
-                      <td><a class="btn btn-danger round" >Down</a> #</td>
+                      <td>3308</td>
+                      <td> Software Development Methods & Tools</td>
+                      <td style="text-align: center; vertical-align: middle;"><a href="#" class="btn btn-lg btn-success round"><span class="fas fa-arrow-down"></span></a>
+                          <a href="#" class="btn btn-lg btn-danger round"><span class="fas fa-arrow-up"></span></a>
+                      </td>
                       <td>3.3</td>
                     </tr>
 
                     <tr>
                       <td>2848</td>
                       <td>Dicrete Structures</td>
-                      <td><a class="btn btn-success round" >Up</a> #</td>
-                      <td><a class="btn btn-danger round" >Down</a> #</td>
+                      <td style="text-align: center; vertical-align: middle;"><a href="#" class="btn btn-lg btn-success round"><span class="fas fa-arrow-down"></span></a>
+                          <a href="#" class="btn btn-lg btn-danger round"><span class="fas fa-arrow-up"></span></a>
+                      </td>
                       <td>#</td>
                     </tr>
 
                     <tr>
                       <td>3002</td>
                       <td>Fundamentals of Human Computer Interaction</td>
-                      <td><a class="btn btn-success round" >Up</a>  #</td>
-                      <td><a class="btn btn-danger round" >Down</a> #</td>
+                      <td style="text-align: center; vertical-align: middle;"><a href="#" class="btn btn-lg btn-success round"><span class="fas fa-arrow-down"></span></a>
+                          <a href="#" class="btn btn-lg btn-danger round"><span class="fas fa-arrow-up"></span></a>
+                      </td>
                       <td>#</td>
                     </tr>
 
