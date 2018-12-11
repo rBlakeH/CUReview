@@ -1,16 +1,6 @@
 <!-- Including Header Partial-->
 <%- include ../layouts/header.ejs %>
 
-
-
-
-
-
-
-
-
-
-
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
       <img src="https://www.clipartmax.com/png/full/6-61239_logo-interlocking-cu-university-of-colorado-boulder-colors.png" height="40"
       width="40" id="cu" >
@@ -67,7 +57,6 @@
                       <th>Name</th>
                       <th>Up Votes</th>
                       <th>Down Votes</th>
-                      <th>Score</th>
                     </tr>
                   </thead>
                   <tfoot>
@@ -76,69 +65,42 @@
                       <th>Name</th>
                       <th>Up Votes</th>
                       <th>Down Votes</th>
-                      <th>Score</th>
                     </tr>
                   </tfoot>
                   <tbody>
 
-                    <tr>
-                      <td class="mr-5">1300</td>
-                      <td>Computer Scince 1: Starting Computing</td>
-                      <td><a class="btn btn-success round" >Up</a> #</td>
-                      <td><a class="btn btn-danger round" >Down</a> #</td>
-                      <td>#</td>
-                    </tr>
-
-                    <tr>
-                      <td>2270</td>
-                      <td> Computer Science 2: Data Structures </td>
-                      <td><a class="btn btn-success round" >Up</a> #</td>
-                      <td><a class="btn btn-danger round" >Down</a> #</td>
-                      <td>3.3</td>
-                    </tr>
-
-                    <tr>
-                      <td>2400</td>
-                      <td> Comptuer Systems</td>
-                      <td><a class="btn btn-success round" >Up</a> #</td>
-                      <td><a class="btn btn-danger round" >Down</a> #</td>
-                      <td>3.3</td>
-                    </tr>
-
-                    <tr>
-                      <td>2820</td>
-                      <td> Linear Algebra with Computer Science Application</td>
-                      <td><a class="btn btn-success round" >Up</a> #</td>
-                      <td><a class="btn btn-danger round" >Down</a> #</td>
-                      <td>3.3</td>
-                    </tr>
-
-                    <tr>
-                      <td>2400</td>
-                      <td> Comptuer Systems</td>
-                      <td><a class="btn btn-success round" >Up</a> #</td>
-                      <td><a class="btn btn-danger round" >Down</a> #</td>
-                      <td>3.3</td>
-                    </tr>
-
-                    <tr>
-                      <td>2848</td>
-                      <td>Dicrete Structures</td>
-                      <td><a class="btn btn-success round" >Up</a> #</td>
-                      <td><a class="btn btn-danger round" >Down</a> #</td>
-                      <td>#</td>
-                    </tr>
-
-                    <tr>
-                      <td>3002</td>
-                      <td>Fundamentals of Human Computer Interaction</td>
-                      <td><a class="btn btn-success round" >Up</a>  #</td>
-                      <td><a class="btn btn-danger round" >Down</a> #</td>
-                      <td>#</td>
-                    </tr>
 
 
 
+                  <% if (data) { %>
+    <!-- Using a for-loop to loop over each row in the database. The 'data' variable is passed from the store.js during the response.render function call -->
+        <% data.forEach(function(item){ %>
+            <tr>
+                <td><%= item.classnumber %></td>
+            
+                <td><%= item.classname %></td>
+            
+                <td>
+                 <button class="btn btn-success round" onclick="buttonClickIncrement('<%= item.classnumber + "_upvote" %>', <%= item.classnumber %>)">Up</button>
+                  <!-- <input type="text" style="border:none ; width:25px" id="inc" value="0"></input> -->
+                  <span id="<%= item.classnumber + "_upvote" %>"><%= item.upvotes %></span>
+                  </td>
+                  <td>
+                  <div>
+                  <span>
+                  <button class="btn btn-danger round" onclick="buttonClickDecrement('<%= item.classnumber + "_dnvote" %>', <%= item.classnumber %>)">Dn</button>
+                  </span>
+                  <span id="<%= item.classnumber + "_dnvote" %>"><%= item.downvotes %></span>
+                  </div>
+                 </td>
+
+                
+
+
+
+            </tr>
+        <% }) %>
+    <% } %>
 
                   </tbody>
                 </table>
@@ -216,68 +178,34 @@
 
 
 
+   <script>
+  // bttw: call the increment route handler
+  function buttonClickIncrement(id, classnumber) {
+    // Increment the vote for a given classnumber
+    axios.get('/classes/increment/' + classnumber)
+      .then(function (response) {
+        document.getElementById(id).innerHTML = response.data.upvotes;
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 
-
-
-
-
-
-
-
-
-
-
-
-<!-- Using if-check to see if an error occurred and displaying appropriate message-->
-<% if (messages.error) { %>
-    <p style="color:red"><%- messages.error %></p>
-<% } %>
-<% if (messages.success) { %>
-    <p style="color:blue"><%- messages.success %></p>
-<% } %>
-
-<script type="text/javascript">
-    var err = <%- JSON.stringify(messages) %>
-        console.log(err)
+  // bttw: call the decrement route handler
+  function buttonClickDecrement(id, classnumber) {
+    // Decrement the vote for a given classnumber
+    axios.get('/classes/decrement/' + classnumber)
+      .then(function (response) {
+        document.getElementById(id).innerHTML = response.data.downvotes;
+        console.log(response);
+      })
+      .catch(function (error) {
+        console.log(error);
+      });
+  }
 </script>
-
-<table border="0" width='60%'>
-    <tr style='text-align:left; background-color:#CCC'>
-        <th>Class Number</th>
-        <th>Class Name</th>
-        <th>Up Votes</th>
-        <th>Down Votes</th>
-    </tr>
-
-    <script>
-                      var i = 0;
-                      function buttonClickIncrement() {
-                        document.getElementById('inc').value = ++i;
-                      }
-                    </script>
-
-    <% if (data) { %>
-    <!-- Using a for-loop to loop over each row in the database. The 'data' variable is passed from the store.js during the response.render function call -->
-        <% data.forEach(function(item){ %>
-            <tr>
-                <td><%= item.classnumber %></td>
-                <td><%= item.classname %></td>
-                <td><%= item.upvotes %>
-                <button class="btn btn-success round" onclick="buttonClickIncrement()">Up</button>
-                      <input type="text" style="border:none ; width:25px" id="inc" value="0"></input>
-                </td>
-                <td><%= item.downvotes %></td>
-            </tr>
-        <% }) %>
-    <% } %>
-</table>
-<!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
-<!--Including Footer Partial-->
-<%- include ../layouts/footer.ejs %>
+  
 
 
 <!--Including Footer Partial-->

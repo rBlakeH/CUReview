@@ -11,7 +11,7 @@ app.get('/', function (request, response) {
       .then(function (rows) {
           // render views/store/list.ejs template file
           response.render('classes/list', {
-              title: 'Classes listing',
+              title: '',
               data: rows
           })
       })
@@ -19,7 +19,7 @@ app.get('/', function (request, response) {
           // display error message in case an error
           request.flash('error', err);
           response.render('classes/list', {
-              title: 'Classes listing',
+              title: '',
               data: ''
           })
       })
@@ -79,14 +79,63 @@ app.post('/add', function (request, response) {
     }
 });
 
-app.get('/edit/(:classnumber)', function (request, response) {
+
+// bttw: added increment route handler
+app.get('/increment/:classnumber', function (req, res) {
+  var classId = req.params.classnumber;
+
+  var query = 'UPDATE classes SET upvotes = upvotes + 1 WHERE classnumber = ' + classId + ';' +
+    'SELECT upvotes FROM classes WHERE classnumber = ' + classId + ';';
+  db.one(query)
+    .then(function (value) {
+      res.send(value)
+    })
+    .catch(function (err) {
+      // todo: add a return value to let the web app understand
+      // that an error was thrown
+      // something like this and then check for -1 in the app and
+      // show a message
+      res.send(-1)
+    })
+
+})
+
+// bttw: added decrement route handler
+app.get('/decrement/:classnumber', function (req, res) {
+  var classId = req.params.classnumber;
+
+  var query = 'UPDATE classes SET downvotes = downvotes - 1 WHERE classnumber = ' + classId + ';' +
+    'SELECT downvotes FROM classes WHERE classnumber = ' + classId + ';';
+  db.one(query)
+    .then(function (value) {
+      res.send(value)
+    })
+    .catch(function (err) {
+      // todo: add a return value to let the web app understand
+      // that an error was thrown
+      // something like this and then check for -1 in the app and
+      // show a message
+      res.send(-1)
+    })
+
+})
+
+
+app.get('/edit/(:upvotes)', function (request, response) {
+
+    response.send(JSON.stringify(request.query))
+    return
+
     // Fetch the id of the item from the request.
-    var classnumber = request.params.classnumber;
+    var classId = request.params.classnumber;
+    var upvotes = request.params.upvotes;
+    console.log(upvotes);
+    
 
     // TODO: Initialize the query variable with a SQL query
     // that returns all columns of an item whose id = itemId in the
     // 'store' table
-    var query = 'select * from classes where classnumber = '+classnumber;
+    var query = 'select * from classes where classnumber = '+classId;
     db.one(query)
         .then(function (row) {
             // if item not found
@@ -97,8 +146,10 @@ app.get('/edit/(:classnumber)', function (request, response) {
             else {
                 response.render('classes/edit', {
                     title: 'Edit Class',
+                    id:row.id,
                     classnumber: row.classnumber,
-                    classname: row.classname
+                    classname: row.classname, 
+                    upvotes: row.upvotes
                 })
             }
         })
@@ -115,7 +166,7 @@ app.get('/edit/(:classnumber)', function (request, response) {
 app.put('/edit/(:id)', function (req, res) {
     // Validate user input - ensure non emptiness
     req.assert('classnumber', 'Class Number is required').notEmpty();
-    req.assert('classname', 'Class Namecis required').notEmpty();
+    req.assert('classname', 'Class Name is required').notEmpty();
 
     var errors = req.validationErrors();
     if (!errors) { // No validation errors
@@ -128,13 +179,13 @@ app.put('/edit/(:id)', function (req, res) {
         };
 
         // Fetch the id of the item from the request.
-        var classnumber = req.params.classnumber;
+        var classnum = req.params.id;
+        var votes = req.params.upvotes;
 
         // TODO: Initialize the updateQuery variable with a SQL query
         // that updates the details of an item given its id
         // in the 'store' table
-        var updateQuery = "UPDATE classes SET classnumber = '"+item.classnumber+"', classname ="+item.classname+" WHERE classnumber =" + classnumber;
-
+        var updateQuery = "UPDATE classes SET upvotes = "+31+" WHERE classnumber =" + classnum;
         // Running SQL query to insert data into the store table
         db.none(updateQuery)
             .then(function (result) {
@@ -146,7 +197,8 @@ app.put('/edit/(:id)', function (req, res) {
                 res.render('classes/edit', {
                     title: 'Edit Class',
                     classnumber: req.params.classnumber,
-                    classname: req.body.classname
+                    classname: req.body.classname,
+                    upvotes: req.body.upvotes
                 })
             })
     }
@@ -156,7 +208,8 @@ app.put('/edit/(:id)', function (req, res) {
         res.render('classes/edit', {
             title: 'Edit Class',
                     classnumber: req.params.classnumber,
-                    classname: req.body.classname
+                    classname: req.body.classname,
+                    upvotes: req.body.upvotes
         })
     }
 });
@@ -180,3 +233,48 @@ app.delete('/delete/(:id)', function (req, res) {
                    res.redirect('/classes')
         })
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
