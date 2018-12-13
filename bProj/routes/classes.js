@@ -104,7 +104,7 @@ app.get('/increment/:classnumber', function (req, res) {
 app.get('/decrement/:classnumber', function (req, res) {
   var classId = req.params.classnumber;
 
-  var query = 'UPDATE classes SET downvotes = downvotes - 1 WHERE classnumber = ' + classId + ';' +
+  var query = 'UPDATE classes SET downvotes = downvotes + 1 WHERE classnumber = ' + classId + ';' +
     'SELECT downvotes FROM classes WHERE classnumber = ' + classId + ';';
   db.one(query)
     .then(function (value) {

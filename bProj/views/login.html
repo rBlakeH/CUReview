@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+
+  <head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>CUReview</title>
+
+    <!-- Bootstrap core CSS-->
+    <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom fonts for this template-->
+    <link href="vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="/public/assets/bootstrap.min.css">
+
+    <!-- Custom styles for this template-->
+    <link href="css/sb-admin.css" rel="stylesheet">
+
+    <!-- Firebase -->
+    <script src="https://www.gstatic.com/firebasejs/5.7.0/firebase.js"></script>
+    <script src="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.js"></script>
+    <link type="text/css" rel="stylesheet" href="https://cdn.firebase.com/libs/firebaseui/3.1.1/firebaseui.css" />
+
+  </head>
+
+  <body>
+
+    <!-- JS files -->
+    <script src="firebase.js"></script>
+    <script src="login.js"></script>
+
+    <!-- Navbar -->
+        <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+
+          <img src="https://www.clipartmax.com/png/full/6-61239_logo-interlocking-cu-university-of-colorado-boulder-colors.png" height="40"
+          width="40" id="cu" >
+
+          <a class="navbar-brand mr-1" href="index.html">Review</a>
+          <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+          </form>
+
+        </nav>
+
+    <!-- Login Box -->
+        <div class="container">
+          <div class="card card-login mx-auto mt-5">
+            <div class="card-header">Sign Up - Login </div>
+            <div class="card-body">
+              <form>
+                <!-- Firebase login -->
+                  <div id="firebaseui-auth-container"></div>
+                  <div id="loader">Loading...</div>
+                <!--  -->
+              </form>
+            </div>
+          </div>
+        </div>
+
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+
+  </body>
+</html>

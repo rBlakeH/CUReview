@@ -37,6 +37,8 @@ var classes = require('./routes/classes');
 app.use('/', index);
 app.use('/classes', classes);
 app.use('/public', express.static('public'));
+app.use('/views', express.static('views'));
+app.use('/vendor/bootstrap/css', express.static('vendor'));
 
 
 var port = 4000;
