@@ -1,10 +1,29 @@
-<!-- Including Header Partial-->
-<%- include ../layouts/header.ejs %>
+<html>
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+  <!-- Bootstrap core CSS-->
+    <link href="/public/assets/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="/public/assets//bootstrap.min.css">
+  <link rel="stylesheet" href="/public/assets/bootstrap-theme.min.css">
+  <link href= "/public/assets/sb-admin.css" rel="stylesheet" type="text/css" >
+  <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+  
+   <!-- The param which is passed from render-->
+   <title><%= title %></title>
+</head>
+<body id = "page-top">
+<h1><%= title %></h1>
 
 <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
       <img src="https://www.clipartmax.com/png/full/6-61239_logo-interlocking-cu-university-of-colorado-boulder-colors.png" height="40"
       width="40" id="cu" >
-      <a class="navbar-brand " href="index.html">Review</a>
+      <a class="navbar-brand " href="/">Review</a> 
+      <a class="navbar-brand btn-dark round mr-5" href="/classes/add">Add Class</a> 
 
       <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
       </form>
@@ -121,7 +140,7 @@
 
           <div class="container fluid">
             <div class="copyright text-center my-auto">
-              <span>Copyright © Your Website 2018</span>
+              <span>Copyright © Team Trio 2018</span>
             </div>
           </div>
 

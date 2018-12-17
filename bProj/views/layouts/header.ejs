@@ -16,10 +16,23 @@
    <!-- The param which is passed from render-->
    <title><%= title %></title>
 </head>
-<body id = "page-top">
+<body id = "page-top" style = "background-color: #e9ecef">
+
+        <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
+
+
+          <img src="https://www.clipartmax.com/png/full/6-61239_logo-interlocking-cu-university-of-colorado-boulder-colors.png" height="40"
+          width="40" id="cu" >
+
+          <a class="navbar-brand mr-1" href="index.html">Review</a>
+          <form class="d-none d-md-inline-block form-inline ml-auto mr-0 mr-md-3 my-2 my-md-0">
+          </form>
+
+        </nav>
+
 <div>
-   <a href="/">Home</a> |
-   <a href="/classes/add">Add Class</a> |
-    <a href="/classes">All Classes</a>
+   <a class="navbar-brand mr-1" style = "color : black;" href="/">Home</a> |
+   <!--<a href="/classes/add">Add Class</a> -->
+  <a class="navbar-brand mr-1" style = "color : black;" href="/classes">All Classes</a> 
 </div>
 <h1><%= title %></h1>
