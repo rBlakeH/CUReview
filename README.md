@@ -8,7 +8,7 @@ Our master branch contains the readme for the project. It also includes the very
 
 To build/run/test the code you must run it locally:
 
-Download the bProj file from branch Blythe
+Download the bProj folder from branch Blythe
 In Postgres use the queries to create your database and populate some data:
 
 CREATE DATABASE cureview;
